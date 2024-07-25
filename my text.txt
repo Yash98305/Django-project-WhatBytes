@@ -1,0 +1,45 @@
+python -m venv backend
+
+backend\Scripts\activate
+
+py -m pip install Django
+
+django-admin --version
+
+django-admin startproject Django_Project
+
+py manage.py runserver
+
+##if problem in runserver
+##python manage.py makemigrations
+##python manage.py migrate
+
+
+
+
+
+
+
+python -m venv env
+
+env\Scripts\activate 
+
+pip install Django
+
+pip install djangorestframework django-cors-headers
+
+django-admin startproject backend
+
+cd backend
+python manage.py startapp users
+cd..
+
+npm create vite@latest frontend --template react
+
+cd backend
+
+python manage.py runserver
+
+pip freeze > requirements.txt
+
+pip install django-environ
