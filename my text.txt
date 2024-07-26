@@ -51,3 +51,7 @@ python manage.py makemigrations
 python manage.py migrate        
 
 python manage.py createsuperuser
+
+pip install djoser djangorestframework-simplejwt pyjwt
+
+pip freeze > requirements.txt

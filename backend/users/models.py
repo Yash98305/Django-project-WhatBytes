@@ -7,11 +7,9 @@ from .managers import CustomUserManager
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("Username"), max_length=150)
     email = models.EmailField(_("Email Address"), unique=True)
-    date_joined = models.DateTimeField(auto_now_add=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-    # is_verified = models.BooleanField(default=False)
-    # last_login = models.DateTimeField(auto_now=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
     
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
@@ -25,4 +23,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         
     @property
     def get_full_name(self):
-        return self.username
+        return f"{self.username}"
