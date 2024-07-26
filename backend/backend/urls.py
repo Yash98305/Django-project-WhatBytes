@@ -19,8 +19,12 @@ from django.urls import path, include
 
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import path, include
+from .views import UserDetailView, LogoutView
 
 urlpatterns = [
+        path('api/v1/auth/me/', UserDetailView.as_view(), name='user-detail'),
+ path('api/v1/auth/logout/', LogoutView.as_view(), name='auth_logout'),
     path("admin/", admin.site.urls),
     path("api/v1/auth/", include('djoser.urls')),
     path("api/v1/auth/", include('djoser.urls.jwt')),

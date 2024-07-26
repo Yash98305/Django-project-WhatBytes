@@ -5,8 +5,8 @@ const AuthContext = createContext(null);
 const api = "http://127.0.0.1:8000/api/v1";
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
-    user: null,
-    token: "",
+    access: "",
+    refresh: "",
   });
   const [mot, setmot] = useState(true);
   const [o, so] = useState(true);
@@ -18,8 +18,8 @@ const AuthProvider = ({ children }) => {
       const parseData = JSON.parse(data);
       setAuth({
         ...auth,
-        user: parseData.user,
-        token: parseData.token,
+        refresh: parseData.refresh,
+        access: parseData.access,
       });
     }
 

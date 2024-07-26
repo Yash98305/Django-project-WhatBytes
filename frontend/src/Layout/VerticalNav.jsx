@@ -16,21 +16,21 @@ const VerticalNav = ({ handleLogout }) => {
         <NavLink to="/home">
           <li style={{ backgroundColor: `${lpath == "/home" ? "#ccc" : ""}` }}>
             <HomeRoundedIcon color="#2E335B" />
-            <span style={{ paddingLeft: "10px" }}>Overview</span>
+            <span style={{ paddingLeft: "10px" }}>Home</span>
           </li>
         </NavLink>
-        <NavLink to="/active-plans">
+        <NavLink to="/profile">
           <li
-            style={{ backgroundColor: `${lpath == "/active-plans" ? "#ccc" : ""}` }}
+            style={{ backgroundColor: `${lpath == "/profile" ? "#ccc" : ""}` }}
           >
             <InventoryRoundedIcon color="#2E335B" />
-            <span style={{ paddingLeft: "10px" }}>Active Plan</span>
+            <span style={{ paddingLeft: "10px" }}>Profile</span>
           </li>
         </NavLink>
           </ul>
       <ul>
         
-       {auth?.token? <NavLink to="/login" onClick={handleLogout}>
+       {auth?.access? <NavLink to="/login" onClick={handleLogout}>
           <li>
             <LogoutRoundedIcon color="#2E335B" />
             <span>Log Out</span>

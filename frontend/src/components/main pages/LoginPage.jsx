@@ -13,24 +13,25 @@ import { IconButton, OutlinedInput, TextField } from "@mui/material";
 
 const Login = () => {
   const location = useLocation();
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const { auth, setAuth, api } = useAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${api}/auth/login`, {
-        email,
+      const res = await axios.post(`${api}/auth/jwt/create/`, {
+        username,
         password,
       });
       if (res) {
         setAuth({
           ...auth,
-          user: res.data.user,
-          token: res.data.token,
+          access: res.data.access,
+          refresh: res.data.refresh,
         });
-        toast.success("Login successfully");
+        toast.success("Login Successful");
+        console.log(res);
         localStorage.setItem("auth", JSON.stringify(res.data));
         navigate("/home");
       } else {
@@ -50,7 +51,7 @@ const Login = () => {
     event.preventDefault();
   };
   useEffect(() => {
-    if (auth.token) {
+    if (auth.access) {
       toast.success(`you already logged in`);
       navigate("/home");
     }
@@ -70,13 +71,13 @@ const Login = () => {
 
             <TextField
               id="outlined-multiline-flexible"
-              label="Email"
-              value={email}
-              name="email"
-              required
+              label="Email / Username"
+              value={username}
+              name="username"
+              
               
               onChange={(e) => {
-                setemail(e.target.value);
+                setUsername(e.target.value);
               }}
               style={{
                 width: "100%",
@@ -97,7 +98,7 @@ const Login = () => {
                 name="password"
                 required
                 onChange={(e) => {
-                  setpassword(e.target.value);
+                  setPassword(e.target.value);
                 }}
                 id="outlined-adornment-password"
                 type={showPassword ? "text" : "password"}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Body from "../Layout/Body.jsx";
-import HomePage from "../components/main pages/HomePage.jsx"
+import PasswordConfirmPage from "../components/main pages/PasswordConfirmPage.jsx"
 import Animate from "../Animate.jsx";
 import  useAuth  from "../context/auth.jsx";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ useEffect(() => {
 }, [navigate, auth]);
   return (
     <>
-    <Animate app={<Body obj={<HomePage/>}/>}/>
+    <Animate app={<Body obj={<PasswordConfirmPage/>}/>}/>
 
       
     </>

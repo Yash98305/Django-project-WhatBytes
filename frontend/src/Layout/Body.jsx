@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../css/home.css";
-import {ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import useAuth  from "../context/auth";
 import Avatar from "@mui/material/Avatar";
 import NotificationsActiveRoundedIcon from "@mui/icons-material/NotificationsActiveRounded";
@@ -18,8 +18,8 @@ const Body = ({ obj }) => {
   const handleLogout = () => {
     setAuth({
       ...auth,
-      user: null,
-      token: "",
+      access: "",
+    refresh: "",
     });
     localStorage.removeItem("auth");
     toast.success("Logout Successfully");
@@ -47,8 +47,8 @@ useEffect(()=>{
               <Avatar
                 style={{ border: "2px solid black", zIndex: "11 !important" }}
                 sx={{ width: 50, height: 50 }}
-                src={`http://localhost:8000/api/v1/user/photo/${auth?.user?._id}`}
-                alt="error"
+                src={`/broken-image.jpg`}
+                alt="U"
               />
             </div>
           </div>
@@ -81,7 +81,6 @@ useEffect(()=>{
           </div>
         </div>
       </div>
-      <ToastContainer />
 
     </>
   );

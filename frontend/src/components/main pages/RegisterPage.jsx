@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
 import axios from "axios";
-import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../../context/auth.jsx";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -71,7 +70,7 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-    if (auth.token) {
+    if (auth.access) {
       toast.success(`You are already logged in`);
       navigate("/home");
     }
