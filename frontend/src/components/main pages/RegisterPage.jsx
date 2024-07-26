@@ -2,7 +2,7 @@ import img from "../../Layout/Mobile login-pana.png";
 import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 import useAuth from "../../context/auth.jsx";
 import FormControl from "@mui/material/FormControl";
@@ -12,6 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -32,41 +33,48 @@ const RegisterPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(password!==re_password){
-      toast.error(`Password and confirm password not match`)
-    }else{
-    try {
-      const res = await axios.post(`${api}/auth/users/`, {
-        username,
-        email,
-        password,
-        re_password,
-      });
-      if (res) {
-        toast.success("Register successfully");
-        navigate("/login");
-      } else {
-        toast.error(res.data.message);
+    if (password !== re_password) {
+      toast.error(`Password and confirm password do not match`);
+    } else {
+      try {
+        const res = await axios.post(`${api}/auth/users/`, {
+          username,
+          email,
+          password,
+          re_password,
+        },{
+          headers:{
+            "Authorization":"",
+          }
+        });
+        console.log(res);
+        if (res) {
+          toast.success("Registered successfully");
+          navigate("/login");
+        } else {
+          toast.error(res.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        if (error.response && error.response.data) {
+          const errors = error.response.data;
+          if (errors.username) {
+            errors.username.forEach((err) => toast.error(`Username: ${err}`));
+          }
+          if (errors.email) {
+            errors.email.forEach((err) => toast.error(`Email: ${err}`));
+          }
+          if (errors.password) {
+            errors.password.forEach((err) => toast.error(`Password: ${err}`));
+          }
+          if (errors.re_password) {
+            errors.re_password.forEach((err) => toast.error(`Confirm Password: ${err}`));
+          }
+        } else {
+          toast.error("Something went wrong");
+        }
       }
-    } catch (error) {
-      if (error.response && error.response.data) {
-        const errors = error.response.data;
-        if (errors.username) {
-          errors.username.forEach((err) => toast.error(`Username: ${err}`));
-        }
-        if (errors.email) {
-          errors.email.forEach((err) => toast.error(`Email: ${err}`));
-        }
-        if (errors.password) {
-          errors.password.forEach((err) => toast.error(`Password: ${err}`));
-        }
-        if (errors.re_password) {
-          errors.re_password.forEach((err) => toast.error(`Confirm Password: ${err}`));
-        }
-      } else {
-        toast.error("Something went wrong");
-      }
-    }}
+    }
   };
 
   useEffect(() => {
@@ -100,11 +108,11 @@ const RegisterPage = () => {
               borderColor: "red",
             }}
           />
-           <ul type="circle" className="reg_e"  style={{
-              marginBottom: "15px",
-              marginTop: "5px",
-            }}>
-            <li><FiberManualRecordIcon sx={{fontSize:7,marginRight:1}}/>Ensure this field has no more than 150 characters.</li>
+          <ul type="circle" className="reg_e" style={{
+            marginBottom: "15px",
+            marginTop: "5px",
+          }}>
+            <li><FiberManualRecordIcon sx={{ fontSize: 7, marginRight: 1 }} />Ensure this field has no more than 150 characters.</li>
           </ul>
           <TextField
             id="outlined-multiline-flexible"
@@ -150,12 +158,12 @@ const RegisterPage = () => {
             />
           </FormControl>
           <ul type="circle" className="reg_e" style={{
-              marginBottom: "10px",
-            }}>
-            <li><FiberManualRecordIcon sx={{fontSize:7,marginRight:1}}/> Your password can’t be too similar to your other personal information.</li>
-            <li><FiberManualRecordIcon sx={{fontSize:7,marginRight:1}}/>Your password must contain at least 8 characters.</li>
-            <li><FiberManualRecordIcon sx={{fontSize:7,marginRight:1}}/>Your password can’t be a commonly used password.</li>
-            <li><FiberManualRecordIcon sx={{fontSize:7,marginRight:1}}/>Your password can’t be entirely numeric.</li>
+            marginBottom: "10px",
+          }}>
+            <li><FiberManualRecordIcon sx={{ fontSize: 7, marginRight: 1 }} /> Your password can’t be too similar to your other personal information.</li>
+            <li><FiberManualRecordIcon sx={{ fontSize: 7, marginRight: 1 }} />Your password must contain at least 8 characters.</li>
+            <li><FiberManualRecordIcon sx={{ fontSize: 7, marginRight: 1 }} />Your password can’t be a commonly used password.</li>
+            <li><FiberManualRecordIcon sx={{ fontSize: 7, marginRight: 1 }} />Your password can’t be entirely numeric.</li>
           </ul>
           <FormControl
             sx={{ m: 1, width: "400px", marginLeft: "-0.1px" }}
@@ -186,9 +194,9 @@ const RegisterPage = () => {
             />
           </FormControl>
           <ul type="circle" className="reg_e" style={{
-              marginBottom: "15px",
-            }} >
-            <li ><FiberManualRecordIcon sx={{fontSize:7,marginRight:1}}/>Enter the same password as before, for verification.</li>
+            marginBottom: "15px",
+          }} >
+            <li><FiberManualRecordIcon sx={{ fontSize: 7, marginRight: 1 }} />Enter the same password as before, for verification.</li>
           </ul>
           <button
             type="submit"
@@ -204,16 +212,16 @@ const RegisterPage = () => {
             SUBMIT
           </button>
           <p
-              style={{
-                marginTop: "8px",
-                textAlign: "right",
-                marginRight: "7px",
-              }}
-            >
-              Already have an account?
-              <NavLink to="/login"> Login In</NavLink>
-            </p>
-    
+            style={{
+              marginTop: "8px",
+              textAlign: "right",
+              marginRight: "7px",
+            }}
+          >
+            Already have an account?
+            <NavLink to="/login"> Login In</NavLink>
+          </p>
+
         </form>
       </div>
     </div>

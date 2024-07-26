@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
 import  useAuth  from "../../context/auth.jsx";
-import img from "../../Layout/Secure login-amico.png";
+import img from "../../assets/Two factor authentication-pana.svg";
 import { IconButton, OutlinedInput, TextField } from "@mui/material";
 
 const ForgotPage = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect } from "react";
 import Body from "../Layout/Body.jsx";
 import ChangePasswordPage from "../components/main pages/ChangePasswordPage.jsx"
 import Animate from "../Animate.jsx";

@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {  toast } from "react-toastify";
 import  useAuth  from "../../context/auth.jsx";
-import img from "../../Layout/Secure login-amico.png";
-import { IconButton, OutlinedInput, TextField } from "@mui/material";
+import img from "../../assets/My password-amico.png";
+import { TextField } from "@mui/material";
 
 const PasswordConfirmPage = () => {
     const { uid, token } = useParams()
@@ -58,7 +53,7 @@ const PasswordConfirmPage = () => {
     <div style={{width:"50%"}}>
           <form onSubmit={handleSubmit} style={{ width: "400px" }}>
             <h1 style={{ textAlign: "center", padding: "40px" }}>
-              Forgot Password
+            Create Password
             </h1>
 
             <TextField

@@ -39,7 +39,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error("Your email/username and password are mismatch");
+      toast.error("Invalid credentials");
     }
   };
 

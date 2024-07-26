@@ -14,7 +14,6 @@ const HomePage = () => {
       const res = await axios.get(`${api}/auth/me/`,{headers:{
         Authorization: `Bearer ${auth.access}`
       }})
-      console.log(res);
       setUser(res.data);
     } catch (error) {
      console.log(error.response.data.detail);
@@ -24,11 +23,11 @@ const HomePage = () => {
    auth && profile()
   },[api,auth])
   return (
-    <div style={{ display: "flex",border:"2px solid red",height:"80vh",padding:"15px"}}>
-    <div style={{ width: "50%",border:"2px solid red",display: "flex",alignItems:"center",justifyContent:"center"}}>
+    <div style={{ display: "flex",height:"80vh",padding:"15px"}}>
+    <div style={{ width: "50%",display: "flex",alignItems:"center",justifyContent:"center"}}>
       <img src={img} alt="error" />
     </div>
-    <div style={{ width: "50%",border:"2px solid red",flexDirection:"column",display: "flex",alignItems:"center",justifyContent:"center"}}>
+    <div style={{ width: "50%",flexDirection:"column",display: "flex",alignItems:"center",justifyContent:"center"}}>
      <h1>Hii! {user?.username}</h1> 
      <p>Welcome to this web application</p>
      <p>Exmple of an authencation web app with cutting edge feature.</p>
@@ -44,9 +43,9 @@ const HomePage = () => {
             display: "flex",
             backgroundColor: "#d9d9d9",
           }}
-          onClick={()=>navigate("/change-password")}
           variant="contained"
           color="success"
+          onClick={()=>navigate("/changepassword")}
         >
           <div
             style={{

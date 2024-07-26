@@ -1,65 +1,58 @@
 import React, { useEffect, useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import FormControl from "@mui/material/FormControl";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
 import  useAuth  from "../../context/auth.jsx";
-import img from "../../Layout/Secure login-amico.png";
+import img from "../../assets/My password-pana.png";
 import { IconButton, OutlinedInput, TextField } from "@mui/material";
 
 const ChangePasswordPage = () => {
   const location = useLocation();
-  "new_password": "Yash@123456",
-  "re_new_password":"Yash@123456",
-  "current_password": "Yash123456"
   const [new_password, setNewPassword] = useState("");
   const [re_new_password, setReNewPassword] = useState("");
   const [current_password, setCurrentPassword] = useState("");
-  const { auth, setAuth, api } = useAuth();
+  const { auth, api } = useAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${api}/auth/jwt/create/`, {
-        username,
-        password,
+      const res = await axios.post(`${api}/auth/users/set_password/`, {
+        new_password,
+        re_new_password,
+        current_password
+      },{
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
       });
       if (res) {
-        setAuth({
-          ...auth,
-          access: res.data.access,
-          refresh: res.data.refresh,
-        });
-        toast.success("Login Successful");
-        console.log(res);
-        localStorage.setItem("auth", JSON.stringify(res.data));
+        toast.success("Password changed successfully");
         navigate("/home");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Your email/username and password are mismatch");
-    }
+        if (error.response && error.response.data) {
+            const errors = error.response.data;
+        if (errors.new_password) {
+            errors.new_password.forEach((err) => toast.error(`New Password: ${err}`));
+          }
+        if (errors.re_new_password) {
+            errors.re_new_password.forEach((err) => toast.error(`Confirm Password: ${err}`));
+          }
+        if (errors.current_password) {
+            errors.current_password.forEach((err) => toast.error(`Current Password: ${err}`));
+          }
+        else{
+            toast.error("Something went wrong")
+        }
+    }}
   };
 
-  const [showPassword, setShowPassword] = React.useState(false);
+useEffect(()=>{
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-  useEffect(() => {
-    if (auth.access) {
-      toast.success(`you already logged in`);
-      navigate("/home");
-    }
-  }, [navigate, auth,location]);
+},[api,auth])
+  
 
   return (
     <>
@@ -70,18 +63,47 @@ const ChangePasswordPage = () => {
     <div style={{width:"50%"}}>
           <form onSubmit={handleSubmit} style={{ width: "400px" }}>
             <h1 style={{ textAlign: "center", padding: "40px" }}>
-              Login Yourself
+              Change Password
             </h1>
 
             <TextField
               id="outlined-multiline-flexible"
-              label="Email / Username"
-              value={username}
-              name="username"
-              
+              label="Current Password"
+              value={current_password}
+            
               
               onChange={(e) => {
-                setUsername(e.target.value);
+                setCurrentPassword(e.target.value);
+              }}
+              style={{
+                width: "100%",
+                borderColor: "red",
+                marginBottom: "40px",
+              }}
+            />
+            <TextField
+              id="outlined-multiline-flexible"
+              label="New Password"
+              value={new_password}
+            
+              
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+              }}
+              style={{
+                width: "100%",
+                borderColor: "red",
+                marginBottom: "40px",
+              }}
+            />
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Confirm Password"
+              value={re_new_password}
+            
+              
+              onChange={(e) => {
+                setReNewPassword(e.target.value);
               }}
               style={{
                 width: "100%",
@@ -90,37 +112,7 @@ const ChangePasswordPage = () => {
               }}
             />
 
-            <FormControl
-              sx={{ m: 1, width: "400px", marginLeft: "-0.1px" }}
-              variant="outlined"
-            >
-              <InputLabel htmlFor="outlined-adornment-password">
-                Password
-              </InputLabel>
-              <OutlinedInput
-                value={password}
-                name="password"
-                required
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
-              />
-            </FormControl>
+           
 
             <button
               style={{
@@ -134,25 +126,8 @@ const ChangePasswordPage = () => {
             >
               Submit
             </button>
-            <p
-              style={{
-                marginTop: "8px",
-                textAlign: "right",
-                marginRight: "7px",
-              }}
-            >
-              Don't have an account yet?
-              <NavLink to="/register"> Sign up</NavLink>
-            </p>
-            <p
-              style={{
-                marginTop: "8px",
-                textAlign: "right",
-                marginRight: "7px",
-              }}
-            >
-              <NavLink to="/forgot">Forgot Password?</NavLink>
-            </p>
+          
+             
           </form>
         </div>
         </div>
