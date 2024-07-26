@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Forgot from "./pages/Forgot.jsx";
 import PasswordConfirm from "./pages/PasswordConfirm.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
 
 const App = () => {
   return (
@@ -18,7 +19,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<Forgot />} />
-        <Route path="/password-confirm" element={<PasswordConfirm />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/password/reset/confirm/:uid/:token" element={<PasswordConfirm />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

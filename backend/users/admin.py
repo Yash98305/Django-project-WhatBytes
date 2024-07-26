@@ -32,12 +32,7 @@ class UserAdmin(BaseUserAdmin):
                 "fields": ("is_staff", "is_active", "is_superuser","groups","user_permissions",)
             },
         ),
-        (
-            _("Important dates"),
-            {
-                "fields": ("last_login",)
-            },
-        ),
+        
     )
     add_fieldsets = (
         (

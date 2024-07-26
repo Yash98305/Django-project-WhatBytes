@@ -161,10 +161,12 @@ DJOSER = {
     'SET_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
+    'PASSWORD_CHANGE_CONFIRMATION': True,
     'SERIALIZERS': {
         'user_create': 'users.serializers.CreateUserSerializer',
         'user': 'users.serializers.CustomUserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
+        'set_password': 'users.serializers.CustomSetPasswordSerializer',
     },
 }
 

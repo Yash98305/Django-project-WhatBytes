@@ -4,15 +4,8 @@ import PasswordConfirmPage from "../components/main pages/PasswordConfirmPage.js
 import Animate from "../Animate.jsx";
 import  useAuth  from "../context/auth.jsx";
 import { useNavigate } from "react-router-dom";
-const Home = () => {
-  const navigate = useNavigate();
-const {auth} = useAuth();
+const PasswordConfirm = () => {
 
-useEffect(() => {
-  if (!auth?.access) {
-    navigate('/login');
-  }
-}, [navigate, auth]);
   return (
     <>
     <Animate app={<Body obj={<PasswordConfirmPage/>}/>}/>
@@ -23,4 +16,4 @@ useEffect(() => {
   );
 };
 
-export default Home;
+export default PasswordConfirm;

@@ -11,10 +11,14 @@ import  useAuth  from "../../context/auth.jsx";
 import img from "../../Layout/Secure login-amico.png";
 import { IconButton, OutlinedInput, TextField } from "@mui/material";
 
-const Login = () => {
+const ChangePasswordPage = () => {
   const location = useLocation();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  "new_password": "Yash@123456",
+  "re_new_password":"Yash@123456",
+  "current_password": "Yash123456"
+  const [new_password, setNewPassword] = useState("");
+  const [re_new_password, setReNewPassword] = useState("");
+  const [current_password, setCurrentPassword] = useState("");
   const { auth, setAuth, api } = useAuth();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -157,4 +161,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ChangePasswordPage;
