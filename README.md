@@ -22,7 +22,6 @@ This project is a Django application that provides user authentication with the 
   - [Change Password Page](#change-password-page)
   - [Dashboard](#dashboard)
   - [Profile Page](#profile-page)
-- [Project Structure](#project-structure)
 
 
 ## Requirements
@@ -36,7 +35,6 @@ This project is a Django application that provides user authentication with the 
 
 1. **Clone the repository:**
 
-   ```bash
    git clone https://github.com/Yash98305/Django-project-WhatBytes.git
    cd Django-project-WhatBytes
 
@@ -93,3 +91,50 @@ This project is a Django application that provides user authentication with the 
 - Display information such as Username, Email, Date Joined, and Last  Updated.
 - Include a link/button to go back to the Dashboard.
 - Provide an option to logout.
+
+# Vite React Frontend
+This section covers the frontend part of the project, built using Vite and React.
+
+Requirements
+Node.js 14+
+npm 
+
+## Installation
+1. **Navigate to the frontend directory:**
+cd frontend
+
+2. **Install dependencies:**
+npm install
+
+3. **Start the development server:**
+npm run dev
+
+4. **Access the application:**
+
+Open your browser and go to http://localhost:5173
+
+## Features
+Login Page:
+
+Includes fields for Username/Email and Password.
+Links to Sign Up and Forgot Password pages.
+Sign Up Page:
+
+Includes fields for Username, Email, Password, and Confirm Password.
+Link to Login page.
+Forgot Password Page:
+
+Includes a field for Email and a button to send reset instructions.
+Change Password Page:
+
+Requires authentication.
+Fields for Old Password, New Password, and Confirm Password.
+Dashboard:
+
+Accessible only to authenticated users.
+Displays a greeting message and links to Profile and Change Password pages.
+Logout option.
+Profile Page:
+
+Displays user information such as Username, Email, Date Joined, and Last Updated.
+Link to Dashboard and Logout option.
